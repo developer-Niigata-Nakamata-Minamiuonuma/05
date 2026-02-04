@@ -72,6 +72,17 @@ body {
   margin-bottom: 10px;
 }
 
+/* ===== 利用料金 ===== */
+.price {
+  font-size: 28px;
+  color: #bf0000;
+}
+
+.sub {
+  font-size: 12px;
+  color: #888;
+}
+
 /* ===== ユーザーID ===== */
 .user-id {
   display: flex;
@@ -146,6 +157,18 @@ svg { transform: rotate(-90deg); }
   margin-top: 8px;
 }
 
+/* ===== ボタン ===== */
+.action-btn {
+  width: 100%;
+  border: none;
+  background: #bf0000;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* ===== ハンバーガーメニュー ===== */
 .overlay {
   position: fixed;
@@ -207,12 +230,18 @@ svg { transform: rotate(-90deg); }
     ⚠️ <span>重要なお知らせ</span>
   </div>
   <div class="notice-detail" id="noticeDetail">
-    現在、一部地域において通信が不安定になる場合があります。<br>
-    詳細は公式サイトをご確認ください。（模擬表示）
+    現在、一部地域で通信が不安定になる場合があります。（模擬）
   </div>
 </div>
 
 <div class="container">
+
+  <!-- 利用料金（トップ） -->
+  <div class="card">
+    <div class="card-title">今月のご利用料金</div>
+    <div class="price">¥2,980</div>
+    <div class="sub">※ 無制限プラン（模擬表示）</div>
+  </div>
 
   <!-- ユーザーID -->
   <div class="card">
@@ -222,6 +251,13 @@ svg { transform: rotate(-90deg); }
       <button class="copy-btn" onclick="copyUserId()">コピー</button>
     </div>
     <div class="copy-msg" id="copyMsg">コピーしました</div>
+  </div>
+
+  <!-- Nメール -->
+  <div class="card">
+    <div class="card-title">Nメール</div>
+    <div>未読メール：2件</div>
+    <div class="sub">Rakuten独自のセキュアメールサービス（模擬）</div>
   </div>
 
   <!-- 通信情報 -->
@@ -255,10 +291,17 @@ svg { transform: rotate(-90deg); }
     </div>
   </div>
 
-  <!-- 注意 -->
+  <!-- 電波改善 -->
   <div class="card">
-    ※ 本画面はデモ（模擬）表示です。<br>
-    実際の通信量・速度を示すものではありません。
+    <div class="card-title">電波改善のご要望</div>
+    <button class="action-btn" onclick="openForm()">
+      電波改善フォームへ
+    </button>
+  </div>
+
+  <!-- 注意 -->
+  <div class="card sub">
+    ※ 本画面はデモ（模擬）表示です。
   </div>
 
 </div>
@@ -273,7 +316,7 @@ svg { transform: rotate(-90deg); }
   <ul>
     <li>利用状況</li>
     <li>料金・お支払い</li>
-    <li>契約プラン</li>
+    <li>Nメール</li>
     <li>各種設定</li>
     <li class="important">ログアウト</li>
   </ul>
@@ -291,27 +334,30 @@ function closeMenu() {
 }
 
 function toggleNotice() {
-  const detail = document.getElementById('noticeDetail');
-  detail.style.display = detail.style.display === 'block' ? 'none' : 'block';
+  const d = document.getElementById('noticeDetail');
+  d.style.display = d.style.display === 'block' ? 'none' : 'block';
 }
 
 function changeMonth() {
-  const select = document.getElementById('monthSelect');
-  const label = document.getElementById('usageLabel');
+  const s = document.getElementById('monthSelect');
+  const l = document.getElementById('usageLabel');
   const map = {
     "2026-02": "高速データ通信（2026年2月）",
     "2026-01": "高速データ通信（2026年1月）",
     "2025-12": "高速データ通信（2025年12月）"
   };
-  label.textContent = map[select.value];
+  l.textContent = map[s.value];
 }
 
 function copyUserId() {
-  const text = document.getElementById('userId').textContent;
-  navigator.clipboard.writeText(text);
-  const msg = document.getElementById('copyMsg');
-  msg.style.display = 'block';
-  setTimeout(() => msg.style.display = 'none', 2000);
+  navigator.clipboard.writeText(document.getElementById('userId').textContent);
+  const m = document.getElementById('copyMsg');
+  m.style.display = 'block';
+  setTimeout(() => m.style.display = 'none', 2000);
+}
+
+function openForm() {
+  alert("電波改善フォーム（模擬）を開きます");
 }
 </script>
 
