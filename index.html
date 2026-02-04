@@ -29,13 +29,10 @@ body {
   background: #fff4f4;
   border-bottom: 1px solid #ffd6d6;
   padding: 12px 16px;
-  font-size: 14px;
   cursor: pointer;
 }
 
 .notice-title {
-  display: flex;
-  align-items: center;
   color: #bf0000;
 }
 
@@ -46,7 +43,9 @@ body {
 }
 
 /* ===== 共通 ===== */
-.container { padding: 16px; }
+.container {
+  padding: 16px;
+}
 
 .card {
   background: #fff;
@@ -93,7 +92,9 @@ body {
   margin: 10px auto 0;
 }
 
-svg { transform: rotate(-90deg); }
+svg {
+  transform: rotate(-90deg);
+}
 
 .bg {
   fill: none;
@@ -125,7 +126,7 @@ svg { transform: rotate(-90deg); }
   margin-top: 8px;
 }
 
-/* ===== ハンバーガー ===== */
+/* ===== ハンバーガーメニュー ===== */
 .overlay {
   position: fixed;
   inset: 0;
@@ -143,8 +144,13 @@ svg { transform: rotate(-90deg); }
   transition: right 0.3s;
 }
 
-.drawer.open { right: 0; }
-.overlay.show { display: block; }
+.drawer.open {
+  right: 0;
+}
+
+.overlay.show {
+  display: block;
+}
 
 .drawer-header {
   background: #bf0000;
@@ -158,6 +164,7 @@ svg { transform: rotate(-90deg); }
 
 <body>
 
+<!-- ヘッダー -->
 <div class="header">
   <div>Rakuten Mobile</div>
   <div onclick="openMenu()">☰</div>
@@ -167,7 +174,7 @@ svg { transform: rotate(-90deg); }
 <div class="notice" onclick="toggleNotice()">
   <div class="notice-title">⚠️ 重要なお知らせ</div>
   <div class="notice-detail" id="noticeDetail">
-    一部地域で通信が不安定になる場合があります。（模擬）
+    一部地域で通信が不安定になる場合があります。（模擬表示）
   </div>
 </div>
 
@@ -199,9 +206,9 @@ svg { transform: rotate(-90deg); }
     <div class="card-title">
       データ通信量
       <select id="monthSelect" onchange="changeMonth()">
-        <option value="2026-02">2026年2月</option>
-        <option value="2026-01">2026年1月</option>
-        <option value="2025-12">2025年12月</option>
+        <option value="2026年2月">2026年2月</option>
+        <option value="2026年1月">2026年1月</option>
+        <option value="2025年12月">2025年12月</option>
       </select>
     </div>
 
@@ -213,19 +220,22 @@ svg { transform: rotate(-90deg); }
       <div class="center-text">無制限</div>
     </div>
 
-    <div class="label" id="usageLabel">高速データ通信（2026年2月）</div>
+    <div class="label" id="usageLabel">
+      高速データ通信（2026年2月）
+    </div>
   </div>
 
   <!-- 電波改善 -->
   <div class="card">
     <div class="card-title">電波改善のご要望</div>
-    <button class="action-btn" onclick="alert('電波改善フォーム（模擬）')">
-      電波改善フォームへ
+    <button class="action-btn" onclick="openSignalForm()">
+      電波改善フォームへ ↗
     </button>
   </div>
 
 </div>
 
+<!-- メニュー -->
 <div class="overlay" onclick="closeMenu()"></div>
 <div class="drawer">
   <div class="drawer-header">
@@ -242,11 +252,11 @@ function toggleNotice() {
 
 function changeMonth() {
   const s = document.getElementById('monthSelect');
-  const l = document.getElementById('usageLabel');
-  l.textContent = `高速データ通信（${s.options[s.selectedIndex].text}）`;
+  document.getElementById('usageLabel').textContent =
+    `高速データ通信（${s.value}）`;
 }
 
-/* ===== Nメール状態管理 ===== */
+/* ===== Nメール ===== */
 function updateNMailUI() {
   const status = localStorage.getItem('nmail');
   const btn = document.getElementById('nmailBtn');
@@ -272,6 +282,15 @@ function handleNMail() {
   }
 }
 
+/* ===== 電波改善フォーム ===== */
+function openSignalForm() {
+  window.open(
+    "https://tayori.com/faq/d41902257c3dfd4f6c51189d13b3e6be00b13c51/detail/d660d53018622fb61182e3f0eb1ec61d69592c70/",
+    "_blank"
+  );
+}
+
+/* ===== メニュー ===== */
 function openMenu() {
   document.querySelector('.drawer').classList.add('open');
   document.querySelector('.overlay').classList.add('show');
