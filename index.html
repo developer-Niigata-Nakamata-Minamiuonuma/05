@@ -84,7 +84,7 @@ body {
   cursor: pointer;
 }
 
-/* ===== 円表示 ===== */
+/* ===== データ通信量 ===== */
 .circle-wrap {
   position: relative;
   width: 220px;
@@ -92,9 +92,7 @@ body {
   margin: 10px auto 0;
 }
 
-svg {
-  transform: rotate(-90deg);
-}
+svg { transform: rotate(-90deg); }
 
 .bg {
   fill: none;
@@ -126,7 +124,7 @@ svg {
   margin-top: 8px;
 }
 
-/* ===== ハンバーガーメニュー ===== */
+/* ===== メニュー ===== */
 .overlay {
   position: fixed;
   inset: 0;
@@ -144,13 +142,8 @@ svg {
   transition: right 0.3s;
 }
 
-.drawer.open {
-  right: 0;
-}
-
-.overlay.show {
-  display: block;
-}
+.drawer.open { right: 0; }
+.overlay.show { display: block; }
 
 .drawer-header {
   background: #bf0000;
@@ -187,7 +180,7 @@ svg {
     <div class="sub">無制限プラン（模擬）</div>
   </div>
 
-  <!-- Nメール -->
+  <!-- Nメール（変更済み） -->
   <div class="card">
     <div class="card-title">Nメール</div>
     <div class="sub" id="nmailDesc"></div>
@@ -256,7 +249,7 @@ function changeMonth() {
     `高速データ通信（${s.value}）`;
 }
 
-/* ===== Nメール ===== */
+/* ===== Nメール処理 ===== */
 function updateNMailUI() {
   const status = localStorage.getItem('nmail');
   const btn = document.getElementById('nmailBtn');
@@ -267,14 +260,14 @@ function updateNMailUI() {
     desc.textContent = 'Nメールはご利用中です';
   } else {
     btn.textContent = '申込';
-    desc.textContent = '独自ドメインのセキュアメール（模擬）';
+    desc.textContent = '独自ドメインのセキュアメールサービス';
   }
 }
 
 function handleNMail() {
   const status = localStorage.getItem('nmail');
   if (status === 'enabled') {
-    alert('Nメール詳細画面（模擬）');
+    location.href = "nmail_detail.html";
   } else {
     localStorage.setItem('nmail', 'enabled');
     alert('Nメールを申し込みました（模擬）');
