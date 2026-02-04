@@ -72,16 +72,27 @@ body {
   color: #bf0000;
 }
 
-/* ===== ボタン ===== */
-.action-btn {
-  width: 100%;
-  border: none;
-  background: #bf0000;
-  color: #fff;
+/* ===== ボタン / リンク ===== */
+.action-link,
+.link-outline {
+  display: block;
+  text-align: center;
+  text-decoration: none;
   padding: 12px;
   border-radius: 10px;
   font-size: 14px;
-  cursor: pointer;
+  margin-top: 10px;
+}
+
+.action-link {
+  background: #bf0000;
+  color: #fff;
+}
+
+.link-outline {
+  border: 1px solid #bf0000;
+  color: #bf0000;
+  background: #fff;
 }
 
 /* ===== データ通信量 ===== */
@@ -124,7 +135,7 @@ svg { transform: rotate(-90deg); }
   margin-top: 8px;
 }
 
-/* ===== メニュー ===== */
+/* ===== メニュー（ドロワー） ===== */
 .overlay {
   position: fixed;
   inset: 0;
@@ -151,6 +162,10 @@ svg { transform: rotate(-90deg); }
   padding: 14px 16px;
   display: flex;
   justify-content: space-between;
+}
+
+.drawer-body {
+  padding: 16px;
 }
 </style>
 </head>
@@ -180,15 +195,15 @@ svg { transform: rotate(-90deg); }
     <div class="sub">無制限プラン（模擬）</div>
   </div>
 
-  <!-- Nメール（常に同一遷移） -->
+  <!-- Nメール -->
   <div class="card">
     <div class="card-title">Nメール</div>
     <div class="sub">
       独自ドメインのセキュアメールサービス
     </div>
-    <button class="action-btn" onclick="openNMail()">
+    <a href="nmail.html" class="action-link">
       申込・詳細
-    </button>
+    </a>
   </div>
 
   <!-- 通信情報 -->
@@ -225,19 +240,40 @@ svg { transform: rotate(-90deg); }
   <!-- 電波改善 -->
   <div class="card">
     <div class="card-title">電波改善のご要望</div>
-    <button class="action-btn" onclick="openSignalForm()">
+    <a
+      class="action-link"
+      href="https://tayori.com/faq/d41902257c3dfd4f6c51189d13b3e6be00b13c51/detail/d660d53018622fb61182e3f0eb1ec61d69592c70/"
+      target="_blank"
+      rel="noopener"
+    >
       電波改善フォームへ ↗
-    </button>
+    </a>
   </div>
 
 </div>
 
 <!-- メニュー -->
 <div class="overlay" onclick="closeMenu()"></div>
+
 <div class="drawer">
   <div class="drawer-header">
     <div>メニュー</div>
     <div onclick="closeMenu()">✕</div>
+  </div>
+
+  <div class="drawer-body">
+    <a href="mypage.html" class="link-outline">
+      マイページ
+    </a>
+
+    <a href="nmail.html" class="link-outline">
+      Nメール
+    </a>
+
+    <!-- 後でURL指定 -->
+    <a href="#" class="link-outline">
+      お申し込み履歴
+    </a>
   </div>
 </div>
 
@@ -251,17 +287,6 @@ function changeMonth() {
   const s = document.getElementById('monthSelect');
   document.getElementById('usageLabel').textContent =
     `高速データ通信（${s.value}）`;
-}
-
-function openNMail() {
-  location.href = "nmail.html";
-}
-
-function openSignalForm() {
-  window.open(
-    "https://tayori.com/faq/d41902257c3dfd4f6c51189d13b3e6be00b13c51/detail/d660d53018622fb61182e3f0eb1ec61d69592c70/",
-    "_blank"
-  );
 }
 
 function openMenu() {
