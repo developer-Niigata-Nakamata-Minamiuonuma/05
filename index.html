@@ -180,11 +180,15 @@ svg { transform: rotate(-90deg); }
     <div class="sub">無制限プラン（模擬）</div>
   </div>
 
-  <!-- Nメール（変更済み） -->
+  <!-- Nメール（常に同一遷移） -->
   <div class="card">
     <div class="card-title">Nメール</div>
-    <div class="sub" id="nmailDesc"></div>
-    <button class="action-btn" id="nmailBtn" onclick="handleNMail()"></button>
+    <div class="sub">
+      独自ドメインのセキュアメールサービス
+    </div>
+    <button class="action-btn" onclick="openNMail()">
+      申込・詳細
+    </button>
   </div>
 
   <!-- 通信情報 -->
@@ -199,9 +203,9 @@ svg { transform: rotate(-90deg); }
     <div class="card-title">
       データ通信量
       <select id="monthSelect" onchange="changeMonth()">
-        <option value="2026年2月">2026年2月</option>
-        <option value="2026年1月">2026年1月</option>
-        <option value="2025年12月">2025年12月</option>
+        <option>2026年2月</option>
+        <option>2026年1月</option>
+        <option>2025年12月</option>
       </select>
     </div>
 
@@ -249,33 +253,10 @@ function changeMonth() {
     `高速データ通信（${s.value}）`;
 }
 
-/* ===== Nメール処理 ===== */
-function updateNMailUI() {
-  const status = localStorage.getItem('nmail');
-  const btn = document.getElementById('nmailBtn');
-  const desc = document.getElementById('nmailDesc');
-
-  if (status === 'enabled') {
-    btn.textContent = '詳細';
-    desc.textContent = 'Nメールはご利用中です';
-  } else {
-    btn.textContent = '申込';
-    desc.textContent = '独自ドメインのセキュアメールサービス';
-  }
+function openNMail() {
+  location.href = "nmail.html";
 }
 
-function handleNMail() {
-  const status = localStorage.getItem('nmail');
-  if (status === 'enabled') {
-    location.href = "nmail_detail.html";
-  } else {
-    localStorage.setItem('nmail', 'enabled');
-    alert('Nメールを申し込みました（模擬）');
-    updateNMailUI();
-  }
-}
-
-/* ===== 電波改善フォーム ===== */
 function openSignalForm() {
   window.open(
     "https://tayori.com/faq/d41902257c3dfd4f6c51189d13b3e6be00b13c51/detail/d660d53018622fb61182e3f0eb1ec61d69592c70/",
@@ -283,7 +264,6 @@ function openSignalForm() {
   );
 }
 
-/* ===== メニュー ===== */
 function openMenu() {
   document.querySelector('.drawer').classList.add('open');
   document.querySelector('.overlay').classList.add('show');
@@ -293,8 +273,6 @@ function closeMenu() {
   document.querySelector('.drawer').classList.remove('open');
   document.querySelector('.overlay').classList.remove('show');
 }
-
-updateNMailUI();
 </script>
 
 </body>
